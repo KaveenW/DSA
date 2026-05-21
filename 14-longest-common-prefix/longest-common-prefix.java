@@ -1,27 +1,28 @@
 class Solution {
     public String longestCommonPrefix(String[] strs) {
-        // 1. Handle edge case: empty array
+        // Edge case: if the array is empty, return an empty string
         if (strs == null || strs.length == 0) {
             return "";
         }
-
-        // 2. Start by assuming the first string is the prefix
+        
+        // Start by assuming the entire first string is the common prefix
         String prefix = strs[0];
-
-        // 3. Compare prefix with every other string
+        
+        // Compare the prefix with every other string in the array
         for (int i = 1; i < strs.length; i++) {
-            // While the current string (strs[i]) doesn't start with our prefix
+            // .indexOf(prefix) returns 0 if strs[i] starts with the prefix
+            // If it returns anything else, it means it's not a prefix yet
             while (strs[i].indexOf(prefix) != 0) {
-                // Shorten the prefix by one character from the end
+                // Chop off the last character of the prefix
                 prefix = prefix.substring(0, prefix.length() - 1);
-
-                // 4. If prefix becomes empty, there's no common prefix
+                
+                // If the prefix gets chopped down to nothing, there is no common prefix
                 if (prefix.isEmpty()) {
                     return "";
                 }
             }
         }
-
+        
         return prefix;
     }
 }
